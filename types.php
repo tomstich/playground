@@ -1,5 +1,7 @@
 <?php
 
+define("FREE" , "20");
+
 $integer = 42;
 $string = 'Hallo';
 
@@ -15,3 +17,4 @@ function type($var , $return)
 echo type($integer , true);
 type($string , false);
 echo type(25.5 , true);
+echo type(FREE , true);
