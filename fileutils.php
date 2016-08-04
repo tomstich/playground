@@ -34,3 +34,15 @@ function openFile($fileName)
     }
     return $handle;
 }
+
+function readContent($fileName)
+{
+    if (file_exists($fileName)) {
+        readfile($fileName);
+        echo "\n";
+    } else {
+        echo $fileName . ' not found!' . "\n";
+        exit;
+    }
+
+}
