@@ -1,19 +1,24 @@
 <?php
 
-// Wenn Datei nicht existiert, dann erstellen wir die
-// Eine Datei öffnen
-// Zu speichernde Daten aus Argument einlesen
+require 'fileutils.php';
 
-define('FILENAME', 'file.txt');
+/*
+ * $ php file.php <filename> [<input>]
+ */
 
-if (!file_exists(FILENAME)) {
-    echo 'File ' . FILENAME . ' does not exist!' . "\n" . 'Creating the file.' . "\n";
+ $usageMessage = "usage: php file.php <filename> [<input>]\n";
+
+$fileName = getArguments(1, $argv);
+$content = getArguments(2, $argv);
+
+if ($fileName === false)  {
+
+    echo $usageMessage;
+    exit(1);
 }
 
-$handle = fopen(FILENAME, 'w+');
-$somecontent = 'Die ist ein bisschen Text' . "\n";
-
-if (fwrite($handle, $somecontent) === FALSE) {
-    echo "Cannot write to file ($filename)";
-    exit;
+if ($content === false) {
+    readContent($fileName);
+} else {
+    writeContent($content, $fileName);
 }
