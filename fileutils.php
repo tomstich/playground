@@ -4,7 +4,7 @@ function writeContent($content, $fileName)
 {
     $handle = openFile($fileName);
     $res = fwrite($handle, $content);
-    
+
     echo $res . " Bytes written\n";
 
     fclose($handle);
@@ -40,11 +40,21 @@ function openFile($fileName)
 function readContent($fileName)
 {
     if (file_exists($fileName)) {
-        readfile($fileName);
-        echo "\n";
+        $bytes = readfile($fileName);
+        echo "\n$bytes bytes read\n";
     } else {
         echo $fileName . ' not found!' . "\n";
         exit;
+    }
+
+}
+
+function getArguments($argPos, $argv)
+{
+    if (isset($argv[$argPos])) {
+        return $argv[$argPos];
+    } else {
+        return false;
     }
 
 }

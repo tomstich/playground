@@ -8,16 +8,17 @@ require 'fileutils.php';
 
  $usageMessage = "usage: php file.php <filename> [<input>]\n";
 
-if (isset($argv[1])) {
-    $fileName = $argv[1];
-} else {
+$fileName = getArguments(1, $argv);
+$content = getArguments(2, $argv);
+
+if ($fileName === false)  {
+
     echo $usageMessage;
     exit(1);
 }
 
-if (isset($argv[2])) {
-    $content = $argv[2];
-    writeContent($content, $fileName);
+if ($content === false) {
+    readContent($fileName);
 } else {
-    readContent($argv[1]);
+    writeContent($content, $fileName);
 }
