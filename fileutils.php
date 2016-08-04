@@ -4,6 +4,8 @@ function writeContent($content, $fileName)
 {
     $handle = openFile($fileName);
     $res = fwrite($handle, $content);
+    
+    echo $res . " Bytes written\n";
 
     fclose($handle);
 
