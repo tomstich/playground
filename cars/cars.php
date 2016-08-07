@@ -2,17 +2,7 @@
 
 require 'car_manager.php';
 
-/*
-Wheels
-Current speed
-Max speed
-Seats
-Color
-horsepower
-status: driving, parking
-brand
-*/
-
+// A shiny nice BMW
 $wheels = 4;
 $currentSpeed = 0.0;
 $maxSpeed = 220.0;
