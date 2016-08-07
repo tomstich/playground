@@ -34,17 +34,6 @@ $currentSpeed = decelerate($currentSpeed, 50);
 $currentSpeed = decelerate($currentSpeed, 50);
 $currentSpeed = decelerate($currentSpeed, 50);
 
-
-function getStatus($status)
-{
-    return $status;
-}
-
-function drive($status)
-{
-    return $status = 'driving';
-}
-
 function accelerate($currentSpeed, $increase, $maxSpeed)
 {
     $oldSpeed = $currentSpeed;
