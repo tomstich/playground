@@ -18,8 +18,12 @@ function start(string $status): string
  *
  */
 
-function stop(string $status): string
-{
+function stop(string $status, float $aCurrentSpeed): string
+{    
+        if ($aCurrentSpeed > 0) {
+            echo "You can not turn off the car during driving!\n";
+            return $status = 'driving';
+        }
     return $status = 'parking';
 }
 
