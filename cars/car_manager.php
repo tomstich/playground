@@ -50,18 +50,14 @@ function drive(float $aMileage, float $aCurrentSpeed, float $aMaxSpeed, float $a
 
 function obsolescence(string $aBrand): float
 {
-    if ($aBrand === 'BMW') {
+    switch ($aBrand) {
+    case "BMW":
         return 5000.0;
-    }
-
-    if ($aBrand === 'Mercedes') {
+    case "Mercedes":
         return 7500.0;
-    }
-
-    if ($aBrand === 'VW') {
+    case "VW":
         return 3200.0;
     }
-
     return 4000.0;
 }
 
