@@ -57,3 +57,5 @@ function debug(string $brand, float $currentSpeed, string $status, float $mileag
         , $mileage
     );
 }
+
+var_dump(obsolescence(13));

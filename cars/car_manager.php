@@ -34,7 +34,7 @@ function obsolescence(string $aBrand): float
     return 4000.0;
 }
 
-function accelerate($currentSpeed, $increase, $maxSpeed)
+function accelerate(float $currentSpeed, int $increase, float $maxSpeed): float
 {
     $oldSpeed = $currentSpeed;
     $newSpeed = $currentSpeed + $increase;
@@ -48,12 +48,12 @@ function accelerate($currentSpeed, $increase, $maxSpeed)
     }
 }
 
-function decelerate($currentSpeed, $decrease)
+function decelerate(float $currentSpeed, int $decrease): float
 {
     $newSpeed = $currentSpeed - $decrease;
     if ($newSpeed < 0) {
         echo "Decreasing ${currentSpeed}km/h to 0km/h\n";
-        return 0;
+        return $currentSpeed;
     }
 
     echo "Decreasing ${currentSpeed}km/h to ${newSpeed}km/h\n";
