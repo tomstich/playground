@@ -50,7 +50,7 @@ debug($brand, $currentSpeed, $status, $mileage);
  */
 function debug(string $brand, float $currentSpeed, string $status, float $mileage)
 {
-    printf("Brand: %-8s\tCurrent speed: %-8.2f\tStatus: %-8s\tMileage: %-8f\n"
+    printf("Brand: %-8s\tCurrent speed: %-8.2f\tStatus: %-8s\tMileage: %-8.2f\n"
         , $brand
         , $currentSpeed
         , $status
