@@ -6,11 +6,15 @@
  *
  */
 
-function start(string $status): string
+function start(string $status, float $mileAge, string $brand): string
 {
     if ($status === 'running' || $status === 'driving') {
         echo "The car is already running!\n";
+    } elseif ($mileAge > obsolescence($brand)) {
+        echo "The obsolescence is reached!\n";
+        return $status = 'parking';
     }
+
     return $status = 'running';
 }
 

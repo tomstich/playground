@@ -12,7 +12,7 @@ $plannedObsolescence = obsolescence($brand);
 debug($brand, $currentSpeed, $status, $mileage);
 
 // Start the car
-$status = start($status);
+$status = start($status, $mileage, $brand);
 debug($brand, $currentSpeed, $status, $mileage);
 
 // Drive some kilometers
@@ -33,7 +33,7 @@ $status = stop($status, $currentSpeed);
 debug($brand, $currentSpeed, $status, $mileage);
 
 // Start the car again again
-$status = start($status);
+$status = start($status, $mileage, $brand);
 debug($brand, $currentSpeed, $status, $mileage);
 
 // Drive the car to death
