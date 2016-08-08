@@ -1,11 +1,11 @@
 <?php
+
 /**
  * Starts the car
  *
  * @param string $status
- *
+ * @return string
  */
-
 function start(string $status, float $mileAge, string $brand): string
 {
     if ($status === 'running' || $status === 'driving') {
@@ -22,9 +22,8 @@ function start(string $status, float $mileAge, string $brand): string
  * Stops the car
  *
  * @param string $status
- *
+ * @return string
  */
-
 function stop(string $status, float $aCurrentSpeed): string
 {
     if ($status === 'parking') {
@@ -44,9 +43,8 @@ function stop(string $status, float $aCurrentSpeed): string
  * @param float $aMaxSpeed
  * @param float $aIncrease
  * @param float $aDistance
- *
+ * @return array
  */
-
 function drive(float $aMileage, float $aCurrentSpeed, float $aMaxSpeed, float $aIncrease, float $aDistance, string $aStatus): array
 {
 
@@ -85,16 +83,12 @@ function drive(float $aMileage, float $aCurrentSpeed, float $aMaxSpeed, float $a
   }
 }
 
-
-
-
 /**
  * Obsolescence of a brand
  *
  * @param string $aBrand
- *
+ * @return float
  */
-
 function obsolescence(string $aBrand): float
 {
     switch ($aBrand) {
@@ -114,9 +108,8 @@ function obsolescence(string $aBrand): float
  * @param float $currentSpeed
  * @param float $increase
  * @param float $MaxSpeed
- *
+ * @return array
  */
-
 function accelerate(float $currentSpeed, int $increase, float $maxSpeed, string $status): array
 {
     $oldSpeed = $currentSpeed;
@@ -138,9 +131,8 @@ function accelerate(float $currentSpeed, int $increase, float $maxSpeed, string 
  *
  * @param float $currentSpeed
  * @param float $decrease
- *
+ * @return array
  */
-
 function decelerate(float $currentSpeed, int $decrease, string $status): array
 {
     $newSpeed = $currentSpeed - $decrease;
