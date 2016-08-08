@@ -57,12 +57,12 @@ function drive(float $aMileage, float $aCurrentSpeed, float $aMaxSpeed, float $a
             $newSpeed = $aCurrentSpeed + $aIncrease;
 
             if ($newSpeed > $aMaxSpeed) {
-            echo "${newSpeed}km/h is higher than the allowed ${aMaxSpeed}km/h speed!\n";
-            $status = 'driving';
-            $newSpeed = $aMaxSpeed;
+                echo "${newSpeed}km/h is higher than the allowed ${aMaxSpeed}km/h speed!\n";
+                $status = 'driving';
+                $newSpeed = $aMaxSpeed;
             } else {
-            echo "Increasing ${aCurrentSpeed}km/h to ${newSpeed}km/h\n";
-            $status = 'driving';
+                echo "Increasing ${aCurrentSpeed}km/h to ${newSpeed}km/h\n";
+                $status = 'driving';
             }
 
         } else {
