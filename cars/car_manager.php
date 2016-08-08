@@ -70,7 +70,7 @@ function drive(string $aBrand, float $aMileage, float $aCurrentSpeed, float $aMa
         return [$mileage, $newSpeed, $status];
     }
 
-    if ($aIncrease > -1) {
+    if ($aIncrease >= 0) {
         if ($newSpeed > $aMaxSpeed) {
             echo "${newSpeed}km/h is higher than the allowed ${aMaxSpeed}km/h speed!\n";
             $status = 'driving';
