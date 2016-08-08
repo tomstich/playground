@@ -37,9 +37,42 @@ function stop(string $status): string
 function drive(float $aMileage, float $aCurrentSpeed, float $aMaxSpeed, float $aIncrease, float $aDistance, string $aStatus): array
 {
     $mileage = $aMileage + $aDistance;
-    list($aCurrentSpeed, $status) = accelerate($aCurrentSpeed, $aIncrease, $aMaxSpeed, $aStatus);
-    $currentSpeed = $aCurrentSpeed;
-    return [$mileage, $currentSpeed, $status];
+    $status = $aStatus;
+
+    if ($aIncrease > -1) {
+        $newSpeed = $aCurrentSpeed + $aIncrease;
+
+        if ($newSpeed > $aMaxSpeed) {
+        echo "${newSpeed}km/h is higher than the allowed ${aMaxSpeed}km/h speed!\n";
+        $status = 'driving';
+        $newSpeed = $aMaxSpeed;
+        } else {
+        echo "Increasing ${aCurrentSpeed}km/h to ${newSpeed}km/h\n";
+        $status = 'driving';
+        }
+
+    } else {
+        $newSpeed = $aCurrentSpeed + $aIncrease;
+
+        if ($newSpeed < 0) {
+            echo "Decreasing ${aCurrentSpeed}km/h to 0km/h\n";
+            $status = 'running';
+            $newSpeed = 0;
+        } else {
+            echo "Decreasing ${aCurrentSpeed}km/h to ${newSpeed}km/h\n";
+            $status = 'driving';
+        }
+    }
+
+
+
+
+
+
+    // $mileage = $aMileage + $aDistance;
+    // list($aCurrentSpeed, $status) = accelerate($aCurrentSpeed, $aIncrease, $aMaxSpeed, $aStatus);
+    // $currentSpeed = $aCurrentSpeed;
+    return [$mileage, $newSpeed, $status];
 }
 
 /**
