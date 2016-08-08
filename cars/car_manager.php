@@ -49,36 +49,37 @@ function drive(float $aMileage, float $aCurrentSpeed, float $aMaxSpeed, float $a
     if ($aStatus === 'parking') {
         echo "The engine is not running!\n";
         return [$aMileage, $aCurrentSpeed, $aStatus];
-    } else {
-        $mileage = $aMileage + $aDistance;
-        $status = $aStatus;
+    }
 
-        if ($aIncrease > -1) {
-            $newSpeed = $aCurrentSpeed + $aIncrease;
+    $mileage = $aMileage + $aDistance;
+    $status = $aStatus;
 
-            if ($newSpeed > $aMaxSpeed) {
-                echo "${newSpeed}km/h is higher than the allowed ${aMaxSpeed}km/h speed!\n";
-                $status = 'driving';
-                $newSpeed = $aMaxSpeed;
-            } else {
-                echo "Increasing ${aCurrentSpeed}km/h to ${newSpeed}km/h\n";
-                $status = 'driving';
-            }
+    if ($aIncrease > -1) {
+        $newSpeed = $aCurrentSpeed + $aIncrease;
 
+        if ($newSpeed > $aMaxSpeed) {
+            echo "${newSpeed}km/h is higher than the allowed ${aMaxSpeed}km/h speed!\n";
+            $status = 'driving';
+            $newSpeed = $aMaxSpeed;
         } else {
-            $newSpeed = $aCurrentSpeed + $aIncrease;
+            echo "Increasing ${aCurrentSpeed}km/h to ${newSpeed}km/h\n";
+            $status = 'driving';
+        }
 
-            if ($newSpeed < 0) {
-                echo "Decreasing ${aCurrentSpeed}km/h to 0km/h\n";
-                $status = 'running';
-                $newSpeed = 0;
-            } else {
-                echo "Decreasing ${aCurrentSpeed}km/h to ${newSpeed}km/h\n";
-                $status = 'driving';
-            }
-      }
-      return [$mileage, $newSpeed, $status];
-  }
+    } else {
+        $newSpeed = $aCurrentSpeed + $aIncrease;
+
+        if ($newSpeed < 0) {
+            echo "Decreasing ${aCurrentSpeed}km/h to 0km/h\n";
+            $status = 'running';
+            $newSpeed = 0;
+        } else {
+            echo "Decreasing ${aCurrentSpeed}km/h to ${newSpeed}km/h\n";
+            $status = 'driving';
+        }
+    }
+
+    return [$mileage, $newSpeed, $status];
 }
 
 /**
