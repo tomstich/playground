@@ -16,16 +16,16 @@ $status = start($status, $mileage, $brand);
 debug($brand, $currentSpeed, $status, $mileage);
 
 // Drive some kilometers
-list($mileage, $currentSpeed, $status) = drive($mileage, $currentSpeed, $maxSpeed, 50, 100, $status);
+list($mileage, $currentSpeed, $status) = drive($brand, $mileage, $currentSpeed, $maxSpeed, 50, 100, $status);
 debug($brand, $currentSpeed, $status, $mileage);
 
 // Drive some more kilometers
-list($mileage, $currentSpeed, $status) = drive($mileage, $currentSpeed, $maxSpeed, 80, 600, $status);
+list($mileage, $currentSpeed, $status) = drive($brand, $mileage, $currentSpeed, $maxSpeed, 80, 600, $status);
 debug($brand, $currentSpeed, $status, $mileage);
 
 // There's a red light! Halt the car!
 echo "There's a red light ahead! Slowing down...\n";
-list($mileage, $currentSpeed, $status) = drive($mileage, $currentSpeed, $maxSpeed, -130, 600, $status);
+list($mileage, $currentSpeed, $status) = drive($brand, $mileage, $currentSpeed, $maxSpeed, -130, 600, $status);
 debug($brand, $currentSpeed, $status, $mileage);
 
 // Stop the car
@@ -37,7 +37,11 @@ $status = start($status, $mileage, $brand);
 debug($brand, $currentSpeed, $status, $mileage);
 
 // Drive the car to death
-list($mileage, $currentSpeed, $status) = drive($mileage, $currentSpeed, $maxSpeed, 80, 3700.1, $status);
+list($mileage, $currentSpeed, $status) = drive($brand, $mileage, $currentSpeed, $maxSpeed, 80, 3700.1, $status);
+debug($brand, $currentSpeed, $status, $mileage);
+
+// Start the car again - hopeless!
+$status = start($status, $mileage, $brand);
 debug($brand, $currentSpeed, $status, $mileage);
 
 /**

@@ -6,13 +6,15 @@
  * @param string $status
  * @return string
  */
-function start(string $status, float $mileAge, string $brand): string
+function start(string $status): string
 {
+    if ($status === 'broken') {
+        echo "The obsolescence is reached!\n";
+        return $status;
+    };
+
     if ($status === 'running' || $status === 'driving') {
         echo "The car is already running!\n";
-    } elseif ($mileAge > obsolescence($brand)) {
-        echo "The obsolescence is reached!\n";
-        return $status = 'parking';
     }
 
     return $status = 'running';
@@ -36,15 +38,20 @@ function stop(string $status, float $aCurrentSpeed): string
 /**
  * Increases the mileAge and uses the accelerate function
  *
- * @param float $aMileage
- * @param float $aCurrentSpeed
- * @param float $aMaxSpeed
- * @param float $aIncrease
- * @param float $aDistance
+ * @param string $aBrand
+ * @param float  $aMileage
+ * @param float  $aCurrentSpeed
+ * @param float  $aMaxSpeed
+ * @param float  $aIncrease
+ * @param float  $aDistance
  * @return array
  */
-function drive(float $aMileage, float $aCurrentSpeed, float $aMaxSpeed, float $aIncrease, float $aDistance, string $aStatus): array
+function drive(string $aBrand, float $aMileage, float $aCurrentSpeed, float $aMaxSpeed, float $aIncrease, float $aDistance, string $aStatus): array
 {
+    if ($aStatus === 'broken') {
+        echo "The obsolescence is reached!\n";
+        return [$aMileage, $aCurrentSpeed, $aStatus];
+    }
 
     if ($aStatus === 'parking') {
         echo "The engine is not running!\n";
@@ -53,6 +60,13 @@ function drive(float $aMileage, float $aCurrentSpeed, float $aMaxSpeed, float $a
 
     $mileage = $aMileage + $aDistance;
     $status = $aStatus;
+
+    if ($mileage > obsolescence($aBrand)) {
+        echo "The obsolescence is reached!\n";
+        $status = 'broken';
+        $newSpeed = 0.0;
+        return [$mileage, $newSpeed, $status];
+    }
 
     if ($aIncrease > -1) {
         $newSpeed = $aCurrentSpeed + $aIncrease;
