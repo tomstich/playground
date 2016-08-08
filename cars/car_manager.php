@@ -61,6 +61,8 @@ function drive(string $aBrand, float $aMileage, float $aCurrentSpeed, float $aMa
     $mileage = $aMileage + $aDistance;
     $status = $aStatus;
 
+    $newSpeed = $aCurrentSpeed + $aIncrease;
+
     if ($mileage > obsolescence($aBrand)) {
         echo "The obsolescence is reached!\n";
         $status = 'broken';
@@ -69,8 +71,6 @@ function drive(string $aBrand, float $aMileage, float $aCurrentSpeed, float $aMa
     }
 
     if ($aIncrease > -1) {
-        $newSpeed = $aCurrentSpeed + $aIncrease;
-
         if ($newSpeed > $aMaxSpeed) {
             echo "${newSpeed}km/h is higher than the allowed ${aMaxSpeed}km/h speed!\n";
             $status = 'driving';
@@ -81,8 +81,6 @@ function drive(string $aBrand, float $aMileage, float $aCurrentSpeed, float $aMa
         }
 
     } else {
-        $newSpeed = $aCurrentSpeed + $aIncrease;
-
         if ($newSpeed < 0) {
             echo "Decreasing ${aCurrentSpeed}km/h to 0km/h\n";
             $status = 'running';
