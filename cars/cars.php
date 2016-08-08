@@ -16,16 +16,16 @@ $status = start($status);
 debug($brand, $currentSpeed, $status, $mileage);
 
 // Drive some kilometers
-list($mileage, $currentSpeed) = drive($mileage, $currentSpeed, $maxSpeed, 50, 100);
+list($mileage, $currentSpeed, $status) = drive($mileage, $currentSpeed, $maxSpeed, 50, 100, $status);
 debug($brand, $currentSpeed, $status, $mileage);
 
 // Drive some more kilometers
-list($mileage, $currentSpeed) = drive($mileage, $currentSpeed, $maxSpeed, 80, 600);
+list($mileage, $currentSpeed, $status) = drive($mileage, $currentSpeed, $maxSpeed, 80, 600, $status);
 debug($brand, $currentSpeed, $status, $mileage);
 
 // There's a red light! Halt the car!
 echo "There's a red light ahead! Slowing down...\n";
-list($mileage, $currentSpeed) = drive($mileage, $currentSpeed, $maxSpeed, -130, 600);
+list($mileage, $currentSpeed, $status) = drive($mileage, $currentSpeed, $maxSpeed, -130, 600, $status);
 debug($brand, $currentSpeed, $status, $mileage);
 
 // Stop the car
@@ -37,17 +37,18 @@ $status = start($status);
 debug($brand, $currentSpeed, $status, $mileage);
 
 // Drive the car to death
-list($mileage, $currentSpeed) = drive($mileage, $currentSpeed, $maxSpeed, 80, 3700.1);
+list($mileage, $currentSpeed, $status) = drive($mileage, $currentSpeed, $maxSpeed, 80, 3700.1, $status);
 debug($brand, $currentSpeed, $status, $mileage);
 
 /**
  * Outputs debug information
  *
- * @param string $test
+ * @param string $brand
  * @param float  $currentSpeed
  * @param string $status
  * @param float  $mileage
  */
+
 function debug(string $brand, float $currentSpeed, string $status, float $mileage)
 {
     printf("Brand: %-8s\tCurrent speed: %-8.2f\tStatus: %-8s\tMileage: %-8.2f\n"

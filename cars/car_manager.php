@@ -34,11 +34,12 @@ function stop(string $status): string
  *
  */
 
-function drive(float $aMileage, float $aCurrentSpeed, float $aMaxSpeed, float $aIncrease, float $aDistance): array
+function drive(float $aMileage, float $aCurrentSpeed, float $aMaxSpeed, float $aIncrease, float $aDistance, string $aStatus): array
 {
     $mileage = $aMileage + $aDistance;
-    $currentSpeed = accelerate($aCurrentSpeed, $aIncrease, $aMaxSpeed);
-    return [$mileage, $currentSpeed];
+    list($aCurrentSpeed, $status) = accelerate($aCurrentSpeed, $aIncrease, $aMaxSpeed, $aStatus);
+    $currentSpeed = $aCurrentSpeed;
+    return [$mileage, $currentSpeed, $status];
 }
 
 /**
@@ -70,17 +71,19 @@ function obsolescence(string $aBrand): float
  *
  */
 
-function accelerate(float $currentSpeed, int $increase, float $maxSpeed): float
+function accelerate(float $currentSpeed, int $increase, float $maxSpeed, string $status): array
 {
     $oldSpeed = $currentSpeed;
     $newSpeed = $currentSpeed + $increase;
 
     if ($newSpeed > $maxSpeed) {
         echo "${newSpeed}km/h is higher than the allowed ${maxSpeed}km/h speed!\n";
-        return $maxSpeed;
+        $status = 'driving';
+        return [$maxSpeed, $status];
     } else {
         echo "Increasing ${oldSpeed}km/h to ${newSpeed}km/h\n";
-        return $newSpeed;
+        $status = 'driving';
+        return [$newSpeed, $status];
     }
 }
 
@@ -92,14 +95,16 @@ function accelerate(float $currentSpeed, int $increase, float $maxSpeed): float
  *
  */
 
-function decelerate(float $currentSpeed, int $decrease): float
+function decelerate(float $currentSpeed, int $decrease, string $status): array
 {
     $newSpeed = $currentSpeed - $decrease;
     if ($newSpeed < 0) {
         echo "Decreasing ${currentSpeed}km/h to 0km/h\n";
-        return $currentSpeed;
+        $status = 'running';
+        return [$currentSpeed, $status];
     }
 
     echo "Decreasing ${currentSpeed}km/h to ${newSpeed}km/h\n";
-    return $newSpeed;
+    $status = 'driving';
+    return [$newSpeed, $status];
 }
