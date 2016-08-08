@@ -22,7 +22,7 @@ debug($brand, $currentSpeed, $status, $mileage);
 // Drive some more kilometers
 list($mileage, $currentSpeed, $status) = drive($mileage, $currentSpeed, $maxSpeed, 80, 600, $status);
 debug($brand, $currentSpeed, $status, $mileage);
-$status = stop($status, $currentSpeed);
+
 // There's a red light! Halt the car!
 echo "There's a red light ahead! Slowing down...\n";
 list($mileage, $currentSpeed, $status) = drive($mileage, $currentSpeed, $maxSpeed, -130, 600, $status);

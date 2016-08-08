@@ -8,6 +8,9 @@
 
 function start(string $status): string
 {
+    if ($status === 'running' || $status === 'driving') {
+        echo "The car is already running!\n";
+    }
     return $status = 'running';
 }
 
