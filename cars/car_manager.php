@@ -99,14 +99,15 @@ function drive(string $aBrand, float $aMileage, float $aCurrentSpeed, float $aMa
 function obsolescence(string $aBrand): float
 {
     switch ($aBrand) {
-    case "BMW":
-        return 5000.0;
-    case "Mercedes":
-        return 7500.0;
-    case "VW":
-        return 3200.0;
+        case "BMW":
+            return 5000.0;
+        case "Mercedes":
+            return 7500.0;
+        case "VW":
+            return 3200.0;
+        default:
+            return 4000.0;
     }
-    return 4000.0;
 }
 
 /**
