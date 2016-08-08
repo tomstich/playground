@@ -26,11 +26,9 @@ function start(string $status, float $mileAge, string $brand): string
  */
 function stop(string $status, float $aCurrentSpeed): string
 {
-    if ($status === 'parking') {
-        if ($aCurrentSpeed > 0) {
-            echo "You can not turn off the car during driving!\n";
-            return $status = 'driving';
-        }
+    if ($status === 'parking' && $aCurrentSpeed > 0) {
+        echo "You can not turn off the car during driving!\n";
+        return $status = 'driving';
     }
     return $status = 'parking';
 }
