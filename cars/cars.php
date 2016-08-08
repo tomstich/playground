@@ -43,7 +43,7 @@ debug($brand, $currentSpeed, $status, $mileage);
 /**
  * Outputs debug information
  *
- * @param string $brand
+ * @param string $test
  * @param float  $currentSpeed
  * @param string $status
  * @param float  $mileage
@@ -57,5 +57,3 @@ function debug(string $brand, float $currentSpeed, string $status, float $mileag
         , $mileage
     );
 }
-
-var_dump(obsolescence(13));

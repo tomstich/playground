@@ -1,14 +1,38 @@
 <?php
+/**
+ * Starts the car
+ *
+ * @param string $status
+ *
+ */
 
 function start(string $status): string
 {
     return $status = 'running';
 }
 
+/**
+ * Stops the car
+ *
+ * @param string $status
+ *
+ */
+
 function stop(string $status): string
 {
     return $status = 'parking';
 }
+
+/**
+ * Increases the mileAge and uses the accelerate function
+ *
+ * @param float $aMileage
+ * @param float $aCurrentSpeed
+ * @param float $aMaxSpeed
+ * @param float $aIncrease
+ * @param float $aDistance
+ *
+ */
 
 function drive(float $aMileage, float $aCurrentSpeed, float $aMaxSpeed, float $aIncrease, float $aDistance): array
 {
@@ -16,6 +40,13 @@ function drive(float $aMileage, float $aCurrentSpeed, float $aMaxSpeed, float $a
     $currentSpeed = accelerate($aCurrentSpeed, $aIncrease, $aMaxSpeed);
     return [$mileage, $currentSpeed];
 }
+
+/**
+ * Obsolescence of a brand
+ *
+ * @param string $aBrand
+ *
+ */
 
 function obsolescence(string $aBrand): float
 {
@@ -34,6 +65,15 @@ function obsolescence(string $aBrand): float
     return 4000.0;
 }
 
+/**
+ * Accelerates the car
+ *
+ * @param float $currentSpeed
+ * @param float $increase
+ * @param float $MaxSpeed
+ *
+ */
+
 function accelerate(float $currentSpeed, int $increase, float $maxSpeed): float
 {
     $oldSpeed = $currentSpeed;
@@ -47,6 +87,14 @@ function accelerate(float $currentSpeed, int $increase, float $maxSpeed): float
         return $newSpeed;
     }
 }
+
+/**
+ * Decelerates the car
+ *
+ * @param float $currentSpeed
+ * @param float $decrease
+ *
+ */
 
 function decelerate(float $currentSpeed, int $decrease): float
 {
