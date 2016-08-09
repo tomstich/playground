@@ -27,6 +27,25 @@ function start(array $car): array
 }
 
 /**
+ * Creates a car
+ *
+ * @param string $aBrand
+ * @return array
+ */
+function createCar(string $aBrand): array
+{
+    $car = [
+        "currentSpeed" => 0.0,
+        "maxSpeed" => 220.0,
+        "status" => 'parking',
+        "brand" =>  $aBrand,
+        "mileage" => 0.0,
+        "plannedObsolescence" => obsolescence($aBrand),
+    ];
+    return $car;
+}
+
+/**
  * Stops the car
  *
  * @param string $status
