@@ -3,25 +3,11 @@
 require 'car_manager.php';
 
 $myCar = createCar('BMW');
-$myCar[2] = start($myCar);
-// $myCar = drive($myCar, 80, 3700);
-$myCar[2] = stop($myCar);
+$myCar = start($myCar);
+//$myCar = drive($myCar, 80, 3700);
+$myCar = stop($myCar);
 
 $brands = ['BMW', 'Mercedes', 'VW', 'Audi', 'Renault', 'Tesla', 'Porsche'];
-
-
-function createCar(string $aBrand): array
-{
-    $car = [
-        "currentSpeed" => 0.0,
-        "maxSpeed" => 220.0,
-        "status" => 'parking',
-        "brand" =>  $aBrand,
-        "mileage" => 0.0,
-        "plannedObsolescence" => obsolescence($aBrand),
-    ];
-    return $car;
-}
 
 
 

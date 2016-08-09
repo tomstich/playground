@@ -27,40 +27,42 @@ function start(array $car): array
 }
 
 /**
- * Creates a car
- *
- * @param string $aBrand
- * @return array
- */
-function createCar(string $aBrand): array
-{
-    $car = [
-        "currentSpeed" => 0.0,
-        "maxSpeed" => 220.0,
-        "status" => 'parking',
-        "brand" =>  $aBrand,
-        "mileage" => 0.0,
-        "plannedObsolescence" => obsolescence($aBrand),
-    ];
-    return $car;
-}
-
-/**
  * Stops the car
  *
  * @param string $status
  * @return string
  */
-function stop(array $myCar): string
+function stop(array $car): array
 {
-    $status = $myCar['status'];
-    $aCurrentSpeed = $myCar['currentSpeed'];
-    if ($status === 'parking' && $aCurrentSpeed > 0) {
+    $status = $car['status'];
+    $aCurrentSpeed = $car['currentSpeed'];
+
+    if ($status === 'driving' && $aCurrentSpeed > 0) {
         echo "You can not turn off the car during driving!\n";
-        return $status = 'driving';
+        return $car;
     }
-    return $status = 'parking';
+    $car['status'] = 'parking';
+    return $car;
 }
+
+/**
+ * Creates a car
+ *
+ * @param string $aBrand
+ * @return array
+ */
+ function createCar(string $aBrand): array
+ {
+     $car = [
+         "currentSpeed" => 0.0,
+         "maxSpeed" => 220.0,
+         "status" => 'parking',
+         "brand" =>  $aBrand,
+         "mileage" => 0.0,
+         "plannedObsolescence" => obsolescence($aBrand),
+     ];
+     return $car;
+ }
 
 /**
  * Increases the mileAge and uses the accelerate function
@@ -73,8 +75,13 @@ function stop(array $myCar): string
  * @param float  $aDistance
  * @return array
  */
-function drive(string $aBrand, float $aMileage, float $aCurrentSpeed, float $aMaxSpeed, float $aIncrease, float $aDistance, string $aStatus): array
+function drive(array $myCar, float $aIncrease, float $aDistance): array
 {
+    $aStatus = $myCar['status'];
+    $aMileage = $myCar['mileage'];
+    $aCurrentSpeed = $myCar['currentSpeed'];
+    $aMaxSpeed = $myCar['maxSpeed'];
+
     if ($aStatus === 'broken') {
         echo "The obsolescence is reached!\n";
         return [$aMileage, $aCurrentSpeed, $aStatus];
