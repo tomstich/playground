@@ -26,8 +26,10 @@ function start(array $myCar): string
  * @param string $status
  * @return string
  */
-function stop(string $status, float $aCurrentSpeed): string
+function stop(array $myCar): string
 {
+    $status = $myCar['status'];
+    $aCurrentSpeed = $myCar['currentSpeed'];
     if ($status === 'parking' && $aCurrentSpeed > 0) {
         echo "You can not turn off the car during driving!\n";
         return $status = 'driving';
