@@ -6,18 +6,24 @@
  * @param string $status
  * @return string
  */
-function start(array $myCar): string
+function start(array $car): array
 {
-    $status = $myCar['status'];
-    if ($status === 'broken') {
-        echo "The obsolescence is reached!\n";
-        return $status;
-    };
+    switch ($car['status']) {
+        case 'broken':
+            echo "The obsolescence is reached!\n";
+            break;
 
-    if ($status === 'running' || $status === 'driving') {
-        echo "The car is already running!\n";
+        case 'parking':
+            $car['status'] = 'running';
+            break;
+
+        case 'running':
+        case 'driving':
+            echo "The car is already running!\n";
+            break;
     }
-    return $status = 'running';
+
+    return $car;
 }
 
 /**
