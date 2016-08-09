@@ -11,28 +11,17 @@ $myCar = stop($myCar);
 
 $brands = ['BMW', 'Mercedes', 'VW', 'Audi', 'Renault', 'Tesla', 'Porsche'];
 
-
-
-
-
-
-exit;
 // Create the fleet
 $fleet = [];
 $fleetSize = 100;
 
 for ($i=0; $i < $fleetSize; $i++) {
+
     $car = createCar($brands[rand(0, count($brands) - 1)]);
-
-    // [
-    //     'brand' => 'BMW',
-    //     'maxSpeed => 222.0, // every brand should have a different max speed
-    //     'identifier' => 'GFGFDEDGDGDFGSDHTSHSTHSER' // something unique
-    // ]
-
-    // 'identifier' is a unique name! (hint: see `uniqid` in PHP docs)
     $fleet[$car['identifier']] = $car;
+
 }
+exit;
 
 // Start fleet
 foreach ($fleet as $identifier => $car) {

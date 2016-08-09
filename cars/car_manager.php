@@ -54,12 +54,13 @@ function stop(array $car): array
  function createCar(string $aBrand): array
  {
      $car = [
-         "currentSpeed" => 0.0,
-         "maxSpeed" => 220.0,
-         "status" => 'parking',
-         "brand" =>  $aBrand,
-         "mileage" => 0.0,
-         "plannedObsolescence" => obsolescence($aBrand),
+         'currentSpeed' => 0.0,
+         'maxSpeed' => 220.0,
+         'status' => 'parking',
+         'brand' =>  $aBrand,
+         'mileage' => 0.0,
+         'plannedObsolescence' => obsolescence($aBrand),
+         'identifier' => uniqid(),
      ];
      return $car;
  }
