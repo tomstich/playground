@@ -75,26 +75,25 @@ function stop(array $car): array
  * @param float  $aDistance
  * @return array
  */
-function drive(array $myCar, float $aIncrease, float $aDistance): array
+function drive(array $car, float $aIncrease, float $aDistance): array
 {
-    $aStatus = $myCar['status'];
-    $aMileage = $myCar['mileage'];
-    $aCurrentSpeed = $myCar['currentSpeed'];
-    $aMaxSpeed = $myCar['maxSpeed'];
+    $aStatus = $car['status'];
+    $aMileage = $car['mileage'];
+    $aCurrentSpeed = $car['currentSpeed'];
+    $aMaxSpeed = $car['maxSpeed'];
 
     if ($aStatus === 'broken') {
         echo "The obsolescence is reached!\n";
-        return [$aMileage, $aCurrentSpeed, $aStatus];
+        return $car;
     }
 
     if ($aStatus === 'parking') {
         echo "The engine is not running!\n";
-        return [$aMileage, $aCurrentSpeed, $aStatus];
+        return $car;
     }
 
-    $status = 'driving';
-    $mileage = $aMileage + $aDistance;
-    $status = $aStatus;
+    $car['status'] = 'driving';
+    $car['mileage'] = $aMileage + $aDistance;
     $newSpeed = $aCurrentSpeed + $aIncrease;
 
     if ($newSpeed > $aMaxSpeed) {
@@ -102,26 +101,26 @@ function drive(array $myCar, float $aIncrease, float $aDistance): array
         $newSpeed = $aMaxSpeed;
     }
 
-    if ($mileage > obsolescence($aBrand)) {
+    if ($aMileage > $car['plannedObsolescence']) {
         echo "The obsolescence is reached!\n";
-        $status = 'broken';
-        $newSpeed = 0.0;
-        return [$mileage, $newSpeed, $status];
+        $car['status'] = 'broken';
+        $car['currentSpeed'] = 0.0;
+        return $car;
     }
 
     if ($newSpeed <= 0) {
         echo "Decreasing ${aCurrentSpeed}km/h to 0km/h\n";
-        $status = 'running';
+        $car['status'] = 'running';
         $newSpeed = 0;
     } elseif ($newSpeed > $aCurrentSpeed) {
         echo "Increasing ${aCurrentSpeed}km/h to ${newSpeed}km/h\n";
-    } elseif ($newSpeed < aCurrentSpeed) {
+    } elseif ($newSpeed < $aCurrentSpeed) {
         echo "Decreasing ${aCurrentSpeed}km/h to ${newSpeed}km/h\n";
     } else {
         echo "Keeping the speed of ${aCurrentSpeed}km/h\n";
     }
-
-    return [$mileage, $newSpeed, $status];
+    $car['currentSpeed'] = $newSpeed;
+    return $car;
 }
 
 /**
