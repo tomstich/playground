@@ -1,0 +1,9 @@
+<phpunit
+  bootstrap="vendor/autoload.php"
+  beStrictAboutOutputDuringTests="true">
+  <testsuites>
+    <testsuite name="everything">
+      <directory>tests</directory>
+    </testsuite>
+  </testsuites>
+</phpunit>
