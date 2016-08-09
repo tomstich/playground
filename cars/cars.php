@@ -3,10 +3,38 @@
 require 'car_manager.php';
 
 // A shiny nice BMW
-$currentSpeed = 0.0;
-$maxSpeed = 220.0;
-$status = 'parking';
-$brand = 'BMW';
+/*
+
+$myCar = createCar('BMW');
+$myCar = drive($myCar, 80, 3700);
+
+*/
+
+$BMW = [
+    "currentSpeed" => 0.0,
+    "maxSpeed" => 220.0,
+    "status" => 'parking',
+    "brand" => 'BMW',
+    "mileage" => 0.0,
+    "plannedObsolescence" => obsolescence('BMW'),
+];
+$VW = [
+    "currentSpeed" => 0.0,
+    "maxSpeed" => 200.0,
+    "status" => 'parking',
+    "brand" => 'VW',
+    "mileage" => 0.0,
+    "plannedObsolescence" => obsolescence('VW'),
+];
+
+$auto1 = $BMW;
+
+
+
+$currentSpeed = $auto1["currentSpeed"];
+$maxSpeed = $auto1["maxSpeed"];
+$status = $auto1["status"]
+$brand = $BMW["brand"];
 $mileage = 0.0;
 $plannedObsolescence = obsolescence($brand);
 debug($brand, $currentSpeed, $status, $mileage);
