@@ -1,5 +1,21 @@
 <?php
 
+
+/**
+ * Outputs debug information
+ *
+ * @param array $car
+ */
+function debug(array $car)
+{
+    printf("Brand: %-8s\tCurrent speed: %-8.2f\tStatus: %-8s\tMileage: %-8.2f\n"
+        , $car['brand']
+        , $car['currentSpeed']
+        , $car['status']
+        , $car['mileage']
+    );
+}
+
 /**
  * Starts the car
  *
@@ -53,7 +69,7 @@ function stop(array $car): array
  */
  function createCar(string $aBrand): array
  {
-     $car = [
+     return [
          'currentSpeed' => 0.0,
          'maxSpeed' => 220.0,
          'status' => 'parking',
@@ -62,7 +78,6 @@ function stop(array $car): array
          'plannedObsolescence' => obsolescence($aBrand),
          'identifier' => uniqid(),
      ];
-     return $car;
  }
 
 /**
@@ -94,7 +109,7 @@ function drive(array $car, float $aIncrease, float $aDistance): array
     }
 
     $car['status'] = 'driving';
-    $car['mileage'] = $aMileage + $aDistance;
+
     $newSpeed = $aCurrentSpeed + $aIncrease;
 
     if ($newSpeed > $aMaxSpeed) {
@@ -102,8 +117,11 @@ function drive(array $car, float $aIncrease, float $aDistance): array
         $newSpeed = $aMaxSpeed;
     }
 
-    if ($aMileage > $car['plannedObsolescence']) {
+    $car['mileage'] = $aMileage + $aDistance;
+
+    if ($car['mileage']  > $car['plannedObsolescence']) {
         echo "The obsolescence is reached!\n";
+        $car['mileage'] = $car['plannedObsolescence'];
         $car['status'] = 'broken';
         $car['currentSpeed'] = 0.0;
         return $car;
