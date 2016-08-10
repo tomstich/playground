@@ -141,4 +141,18 @@ class CarTest extends TestCase
         $car->drive(180.0, 5000.1);
         $this->assertEquals($maxMileage, $car->mileage());
     }
+
+    /**
+     * @test
+     */
+    public function itShouldStopDrivingIfPlannedObsolescenceIsReached()
+    {
+        $maxMileage = 5000.0;
+        $car = new Car(250.0, $maxMileage);
+        $car->start();
+
+        $car->drive(180.0, 5100.0);
+        $this->assertEquals(0.0, $car->speed());
+        $this->assertEquals('broken', $car->status());
+    }
 }

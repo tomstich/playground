@@ -48,7 +48,9 @@ class Car
         $newMileage = $this->mileage + $distance;
 
         if ($newMileage > $this->maxMileage) {
+            $this->status = 'broken';
             $newMileage = $this->maxMileage;
+            $newSpeed = 0.0;
         }
 
         if ($newSpeed < 0.0) {
@@ -61,9 +63,10 @@ class Car
 
         if ($this->status !== 'parking' && $newSpeed !== 0.0) {
             $this->status = 'driving';
-            $this->speed = $newSpeed;
-            $this->mileage += $newMileage;
         }
+
+        $this->speed = $newSpeed;
+        $this->mileage += $newMileage;
     }
 
     /**
