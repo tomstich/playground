@@ -168,4 +168,17 @@ class CarTest extends TestCase
         $this->assertEquals(0.0, $car->speed());
         $this->assertEquals('broken', $car->status());
     }
+
+    /**
+     * @test
+     */
+    public function itShouldNotCoverDistanceNotDriving()
+    {
+        $this->car->start();
+        $this->assertEquals(0.0, $this->car->mileage());
+
+        $this->car->drive(0.0, 10.0);
+        $this->assertEquals(0.0, $this->car->mileage());
+
+    }
 }

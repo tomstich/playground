@@ -46,7 +46,7 @@ class Car
     {
         $newSpeed = $this->speed + $delta;
 
-        if ($distance > 0) {
+        if ($newSpeed > 0 && $distance > 0) {
             $this->mileage += $distance;
         }
 
