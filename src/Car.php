@@ -39,6 +39,10 @@ class Car
     {
         $newSpeed = $this->speed + $delta;
 
+        if ($newSpeed < 0.0) {
+            $newSpeed = 0.0;
+        }
+
         if ($newSpeed > $this->maxSpeed) {
             $newSpeed = $this->maxSpeed;
         }

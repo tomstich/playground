@@ -35,25 +35,27 @@ class CarTest extends TestCase
     /**
      * @test
      */
-    public function itSpeedUpTheCar()
+    public function itShouldDriveTheCar()
     {
         $car = new Car(250.0);
 
         $car->start();
-        $this->assertEquals('running', $car->status());
 
         $car->drive(30.0, 42.0);
         $this->assertEquals('driving', $car->status());
     }
 
-    public function itShouldSlowDownTheCar()
+    /**
+     * @test
+     */
+    public function itShouldNotDriveWithNegativeSpeed()
     {
         $car = new Car(250.0);
 
         $car->start();
 
-        $car->drive(30.0, 42.0);
-        $this->assertEquals(30.0, $car->status());
+        $car->drive(-10.0, 42.0);
+        $this->assertEquals(0.0, $car->speed());
     }
 
     /**
