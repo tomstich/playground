@@ -181,4 +181,33 @@ class CarTest extends TestCase
         $this->assertEquals(0.0, $this->car->mileage());
 
     }
+
+    /**
+     * @test
+     */
+    public function itShouldNotStartIfBroken()
+    {
+        $maxMileage = 5000.0;
+        $car = new Car(250.0, $maxMileage);
+        $car->start();
+
+        $car->drive(90.0, 5000.1);
+        $this->assertEquals('broken', $car->status());
+
+        $car->start();
+        $this->assertEquals('broken', $car->status());
+    }
+
+    /**
+     * @test
+     */
+    public function itShouldNotStartWhileDriving()
+    {
+        $this->car->start();
+        $this->car->drive(50.0, 100.0);
+        $this->assertEquals('driving', $this->car->status());
+
+        $this->car->start();
+        $this->assertEquals('driving', $this->car->status());
+    }
 }

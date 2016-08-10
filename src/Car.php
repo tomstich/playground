@@ -30,7 +30,9 @@ class Car
 
     public function start()
     {
-        $this->status = 'running';
+        if (!($this->status == 'driving' || $this->status == 'broken')) {
+            $this->status = 'running';
+        }
     }
 
     public function stop()
