@@ -13,11 +13,12 @@ class Car
     /** @var float */
     private $mileage;
 
-    public function __construct()
+    public function __construct($maxSpeed)
     {
         $this->status = 'parking';
         $this->speed = 0.0;
         $this->mileage = 0.0;
+        $this->maxSpeed = $maxSpeed;
     }
 
     public function start()
@@ -37,6 +38,11 @@ class Car
     public function drive(float $delta, float $distance)
     {
         $newSpeed = $this->speed + $delta;
+
+        if ($newSpeed > $this->maxSpeed) {
+            $newSpeed = $this->maxSpeed;
+        }
+
         if ($this->status !== 'parking' && $newSpeed !== 0.0) {
             $this->status = 'driving';
             $this->speed = $newSpeed;

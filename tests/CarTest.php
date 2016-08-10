@@ -11,7 +11,7 @@ class CarTest extends TestCase
      */
     public function itShouldStartTheCar()
     {
-        $car = new Car('BMW');
+        $car = new Car(250.0);
         $this->assertEquals('parking', $car->status());
 
         $car->start();
@@ -23,7 +23,7 @@ class CarTest extends TestCase
      */
     public function itShouldStopTheCar()
     {
-        $car = new Car('BMW');
+        $car = new Car(250.0);
 
         $car->start();
         $this->assertEquals('running', $car->status());
@@ -37,7 +37,7 @@ class CarTest extends TestCase
      */
     public function itSpeedUpTheCar()
     {
-        $car = new Car('BMW');
+        $car = new Car(250.0);
 
         $car->start();
         $this->assertEquals('running', $car->status());
@@ -48,7 +48,7 @@ class CarTest extends TestCase
 
     public function itShouldSlowDownTheCar()
     {
-        $car = new Car('BMW');
+        $car = new Car(250.0);
 
         $car->start();
 
@@ -59,9 +59,23 @@ class CarTest extends TestCase
     /**
      * @test
      */
+    public function itShouldNotDriveFasterThanMaxSpeed()
+    {
+        $maxSpeed = 200.0;
+        $car = new Car($maxSpeed);
+
+        $car->start();
+
+        $car->drive(220.0, 42.0);
+        $this->assertEquals($maxSpeed, $car->speed());
+    }
+
+    /**
+     * @test
+     */
     public function itShouldLeaveStatusToRunning()
     {
-        $car = new Car('BMW');
+        $car = new Car(250.0);
 
         $car->start();
         $this->assertEquals('running', $car->status());
@@ -75,7 +89,7 @@ class CarTest extends TestCase
      */
     public function itShouldNotDriveBeforeCarWasStarted()
     {
-        $car = new Car('BMW');
+        $car = new Car(250.0);
 
         $car->drive(10.0, 42.0);
         $this->assertEquals('parking', $car->status());
@@ -86,7 +100,7 @@ class CarTest extends TestCase
      */
     public function itShouldReturnTheSpeed()
     {
-        $car = new Car('BMW');
+        $car = new Car(250.0);
         $this->assertEquals(0.0, $car->speed());
 
         $car->start();
@@ -103,7 +117,7 @@ class CarTest extends TestCase
      */
     public function itShouldReturnTheMileage()
     {
-        $car = new Car('BMW');
+        $car = new Car(250.0);
         $this->assertEquals(0.0, $car->mileage());
 
         $car->start();
