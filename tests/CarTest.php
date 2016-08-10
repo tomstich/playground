@@ -6,16 +6,25 @@ use PHPUnit\Framework\TestCase;
 
 class CarTest extends TestCase
 {
+    /** @var Car */
+    private $car;
+
+    public function setUp()
+    {
+        $maxSpeed = 250.0;
+        $maxMileage = 1000.0;
+        $this->car = new Car($maxSpeed, $maxMileage);
+    }
+
     /**
      * @test
      */
     public function itShouldStartTheCar()
     {
-        $car = new Car(250.0);
-        $this->assertEquals('parking', $car->status());
+        $this->assertEquals('parking', $this->car->status());
 
-        $car->start();
-        $this->assertEquals('running', $car->status());
+        $this->car->start();
+        $this->assertEquals('running', $this->car->status());
     }
 
     /**
@@ -23,13 +32,11 @@ class CarTest extends TestCase
      */
     public function itShouldStopTheCar()
     {
-        $car = new Car(250.0);
+        $this->car->start();
+        $this->assertEquals('running', $this->car->status());
 
-        $car->start();
-        $this->assertEquals('running', $car->status());
-
-        $car->stop();
-        $this->assertEquals('parking', $car->status());
+        $this->car->stop();
+        $this->assertEquals('parking', $this->car->status());
     }
 
     /**
@@ -37,12 +44,11 @@ class CarTest extends TestCase
      */
     public function itShouldDriveTheCar()
     {
-        $car = new Car(250.0);
+        $this->car->start();
+        $this->assertEquals('running', $this->car->status());
 
-        $car->start();
-
-        $car->drive(30.0, 42.0);
-        $this->assertEquals('driving', $car->status());
+        $this->car->drive(30.0, 42.0);
+        $this->assertEquals('driving', $this->car->status());
     }
 
     /**
@@ -50,12 +56,10 @@ class CarTest extends TestCase
      */
     public function itShouldNotDriveWithNegativeSpeed()
     {
-        $car = new Car(250.0);
+        $this->car->start();
 
-        $car->start();
-
-        $car->drive(-10.0, 42.0);
-        $this->assertEquals(0.0, $car->speed());
+        $this->car->drive(-10.0, 42.0);
+        $this->assertEquals(0.0, $this->car->speed());
     }
 
     /**
@@ -64,7 +68,8 @@ class CarTest extends TestCase
     public function itShouldNotDriveFasterThanMaxSpeed()
     {
         $maxSpeed = 200.0;
-        $car = new Car($maxSpeed);
+        $maxMileage = 1000.0;
+        $car = new Car($maxSpeed, $maxMileage);
 
         $car->start();
 
@@ -77,13 +82,11 @@ class CarTest extends TestCase
      */
     public function itShouldLeaveStatusToRunning()
     {
-        $car = new Car(250.0);
+        $this->car->start();
+        $this->assertEquals('running', $this->car->status());
 
-        $car->start();
-        $this->assertEquals('running', $car->status());
-
-        $car->drive(0.0, 42.0);
-        $this->assertEquals('running', $car->status());
+        $this->car->drive(0.0, 42.0);
+        $this->assertEquals('running', $this->car->status());
     }
 
     /**
@@ -91,10 +94,8 @@ class CarTest extends TestCase
      */
     public function itShouldNotDriveBeforeCarWasStarted()
     {
-        $car = new Car(250.0);
-
-        $car->drive(10.0, 42.0);
-        $this->assertEquals('parking', $car->status());
+        $this->car->drive(10.0, 42.0);
+        $this->assertEquals('parking', $this->car->status());
     }
 
     /**
@@ -102,16 +103,15 @@ class CarTest extends TestCase
      */
     public function itShouldReturnTheSpeed()
     {
-        $car = new Car(250.0);
-        $this->assertEquals(0.0, $car->speed());
+        $this->assertEquals(0.0, $this->car->speed());
 
-        $car->start();
+        $this->car->start();
 
-        $car->drive(50.0, 55.0);
-        $this->assertEquals(50.0, $car->speed());
+        $this->car->drive(50.0, 55.0);
+        $this->assertEquals(50.0, $this->car->speed());
 
-        $car->drive(-25.0, 55.0);
-        $this->assertEquals(25.0, $car->speed());
+        $this->car->drive(-25.0, 55.0);
+        $this->assertEquals(25.0, $this->car->speed());
     }
 
     /**
@@ -119,12 +119,26 @@ class CarTest extends TestCase
      */
     public function itShouldReturnTheMileage()
     {
-        $car = new Car(250.0);
+        $this->assertEquals(0.0, $this->car->mileage());
+
+        $this->car->start();
+
+        $this->car->drive(50.0, 120.0);
+        $this->assertEquals(120.0, $this->car->mileage());
+    }
+
+    /**
+     * @test
+     */
+    public function itShouldNotDriveFurtherThanPlannedObsolesence()
+    {
+        $maxMileage = 5000.0;
+        $car = new Car(250.0, $maxMileage);
         $this->assertEquals(0.0, $car->mileage());
 
         $car->start();
 
-        $car->drive(50.0, 120.0);
-        $this->assertEquals(120.0, $car->mileage());
+        $car->drive(180.0, 5000.1);
+        $this->assertEquals($maxMileage, $car->mileage());
     }
 }
