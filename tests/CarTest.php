@@ -240,4 +240,15 @@ class CarTest extends TestCase
         $this->car->stop();
         $this->assertEquals('broken', $this->car->status());
     }
+
+    /**
+     * @test
+     */
+    public function itShouldNotSetSpeedIfCarIsNotStarted()
+    {
+        $this->assertEquals(0.0, $this->car->speed());
+
+        $this->car->drive(50.0, 100.0);
+        $this->assertEquals(0.0, $this->car->speed());
+    }
 }

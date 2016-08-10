@@ -72,7 +72,9 @@ class Car
             $this->status = 'driving';
         }
 
-        $this->speed = $newSpeed;
+        if ($this->status != 'parking') {
+            $this->speed = $newSpeed;
+        }
     }
 
     /**
