@@ -210,4 +210,18 @@ class CarTest extends TestCase
         $this->car->start();
         $this->assertEquals('driving', $this->car->status());
     }
+
+    /**
+     * @test
+     */
+    public function itShouldNotStopIfDriving()
+    {
+        $this->car->start();
+
+        $this->car->drive(50.0, 100.0);
+        $this->assertEquals('driving', $this->car->status());
+
+        $this->car->stop();
+        $this->assertEquals('driving', $this->car->status());
+    }
 }
