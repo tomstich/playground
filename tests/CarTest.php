@@ -13,7 +13,7 @@ class CarTest extends TestCase
     {
         $maxSpeed = 250.0;
         $maxMileage = 1000.0;
-        $this->car = new Car($maxSpeed, $maxMileage);
+        $this->car = new Car('BMW', $maxSpeed, $maxMileage);
     }
 
     /**
@@ -21,7 +21,7 @@ class CarTest extends TestCase
      */
     public function itShouldHaveStatusParkingAfterCreation()
     {
-        $car = new Car(50.0, 100.0);
+        $car = new Car('BMW', 50.0, 100.0);
         $this->assertEquals('parking', $car->status());
     }
 
@@ -78,7 +78,7 @@ class CarTest extends TestCase
     {
         $maxSpeed = 200.0;
         $maxMileage = 1000.0;
-        $car = new Car($maxSpeed, $maxMileage);
+        $car = new Car('BMW', $maxSpeed, $maxMileage);
 
         $car->start();
 
@@ -155,7 +155,7 @@ class CarTest extends TestCase
     public function itShouldNotDriveFurtherThanPlannedObsolesence()
     {
         $maxMileage = 5000.0;
-        $car = new Car(250.0, $maxMileage);
+        $car = new Car('BMW', 250.0, $maxMileage);
         $this->assertEquals(0.0, $car->mileage());
 
         $car->start();
@@ -170,7 +170,7 @@ class CarTest extends TestCase
     public function itShouldStopDrivingIfPlannedObsolescenceIsReached()
     {
         $maxMileage = 5000.0;
-        $car = new Car(250.0, $maxMileage);
+        $car = new Car('BMW', 250.0, $maxMileage);
         $car->start();
 
         $car->drive(180.0, 5100.0);
@@ -197,7 +197,7 @@ class CarTest extends TestCase
     public function itShouldNotStartIfBroken()
     {
         $maxMileage = 5000.0;
-        $car = new Car(250.0, $maxMileage);
+        $car = new Car('BMW', 250.0, $maxMileage);
         $car->start();
 
         $car->drive(90.0, 5000.1);
@@ -240,7 +240,7 @@ class CarTest extends TestCase
     public function itShouldNotStopIfBroken()
     {
         $maxMileage = 1000.0;
-        $car = new Car(250, $maxMileage);
+        $car = new Car('BMW', 250, $maxMileage);
         $car->start();
 
         $car->drive(50.0, 1000.1);
@@ -267,7 +267,7 @@ class CarTest extends TestCase
     public function itShouldNotSetSpeedIfCarIsBroken()
     {
         $maxMileage = 1000.0;
-        $car = new Car(250, $maxMileage);
+        $car = new Car('BMW', 250, $maxMileage);
         $car->start();
 
         $car->drive(50.0, 1000.1);
@@ -275,5 +275,56 @@ class CarTest extends TestCase
 
         $car->drive(50.0, 500.0);
         $this->assertEquals(0.0, $car->speed());
+    }
+
+    /**
+     * @test
+     */
+    public function itShouldHaveBrand()
+    {
+        $car = new Car('BMW', 220.0, 5000.0);
+        $this->assertEquals('BMW', $car->brand());
+    }
+
+    /**
+     * @test
+     */
+    public function itShouldReturnStats()
+    {
+        $maxSpeed = 250.0;
+        $maxMileage = 6000.0;
+        $brand = 'BMW';
+
+        $car = new Car($brand, $maxSpeed, $maxMileage);
+
+        $expectedStats = [
+            'brand' => 'BMW',
+            'maxSpeed' => $maxSpeed,
+            'maxMileage' => $maxMileage,
+            'speed' => 0.0,
+            'mileage' => 0.0,
+            'status' => 'parking',
+        ];
+
+        $this->assertEquals($expectedStats, $car->stats());
+
+        $car->start();
+
+        $expectedStats['status'] = 'running';
+        $this->assertEquals($expectedStats, $car->stats());
+
+        $car->drive(180.0, 6000.0);
+
+        $expectedStats['status'] = 'driving';
+        $expectedStats['speed'] = 180.0;
+        $expectedStats['mileage'] = 6000.0;
+        $this->assertEquals($expectedStats, $car->stats());
+
+        $car->drive(10.0, 0.1);
+
+        $expectedStats['status'] = 'broken';
+        $expectedStats['speed'] = 0.0;
+        $expectedStats['mileage'] = 6000.0;
+        $this->assertEquals($expectedStats, $car->stats());
     }
 }

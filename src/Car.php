@@ -5,6 +5,9 @@ namespace Jimdo;
 class Car
 {
     /** @var string */
+    private $brand;
+
+    /** @var string */
     private $status;
 
     /** @var float */
@@ -19,8 +22,9 @@ class Car
     /** @var float */
     private $maxMileage;
 
-    public function __construct(float $maxSpeed, float $maxMileage)
+    public function __construct(string $brand, float $maxSpeed, float $maxMileage)
     {
+        $this->brand = $brand;
         $this->status = 'parking';
         $this->speed = 0.0;
         $this->mileage = 0.0;
@@ -50,14 +54,14 @@ class Car
     {
         $newSpeed = $this->speed + $delta;
 
-        if ($newSpeed > 0 && $distance > 0) {
-            $this->mileage += $distance;
-        }
-
         if ($this->mileage + $distance > $this->maxMileage) {
             $this->status = 'broken';
             $this->mileage = $this->maxMileage;
             $newSpeed = 0.0;
+        }
+
+        if ($newSpeed > 0 && $distance > 0) {
+            $this->mileage += $distance;
         }
 
         if ($newSpeed < 0.0) {
@@ -99,5 +103,28 @@ class Car
     public function mileage(): float
     {
         return $this->mileage;
+    }
+
+    /**
+     * @return string
+     */
+    public function brand(): string
+    {
+        return $this->brand;
+    }
+
+    /**
+     * @return array
+     */
+    public function stats(): array
+    {
+        return [
+            'brand' => $this->brand,
+            'maxSpeed' => $this->maxSpeed,
+            'maxMileage' => $this->maxMileage,
+            'speed' => $this->speed,
+            'mileage' => $this->mileage,
+            'status' => $this->status,
+        ];
     }
 }
