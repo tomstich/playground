@@ -45,11 +45,14 @@ class Car
     public function drive(float $delta, float $distance)
     {
         $newSpeed = $this->speed + $delta;
-        $newMileage = $this->mileage + $distance;
 
-        if ($newMileage > $this->maxMileage) {
+        if ($distance > 0) {
+            $this->mileage += $distance;
+        }
+
+        if ($this->mileage + $distance > $this->maxMileage) {
             $this->status = 'broken';
-            $newMileage = $this->maxMileage;
+            $this->mileage = $this->maxMileage;
             $newSpeed = 0.0;
         }
 
@@ -66,7 +69,6 @@ class Car
         }
 
         $this->speed = $newSpeed;
-        $this->mileage += $newMileage;
     }
 
     /**

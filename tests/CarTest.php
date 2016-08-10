@@ -130,6 +130,19 @@ class CarTest extends TestCase
     /**
      * @test
      */
+    public function itShouldIgnoreNegativeDistances()
+    {
+        $this->assertEquals(0.0, $this->car->mileage());
+
+        $this->car->start();
+
+        $this->car->drive(50.0, -120.0);
+        $this->assertEquals(0.0, $this->car->mileage());
+    }
+
+    /**
+     * @test
+     */
     public function itShouldNotDriveFurtherThanPlannedObsolesence()
     {
         $maxMileage = 5000.0;
