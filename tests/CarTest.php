@@ -232,13 +232,13 @@ class CarTest extends TestCase
     {
         $maxMileage = 1000.0;
         $car = new Car(250, $maxMileage);
-        $this->car->start();
+        $car->start();
 
-        $this->car->drive(50.0, 1000.1);
-        $this->assertEquals('broken', $this->car->status());
+        $car->drive(50.0, 1000.1);
+        $this->assertEquals('broken', $car->status());
 
-        $this->car->stop();
-        $this->assertEquals('broken', $this->car->status());
+        $car->stop();
+        $this->assertEquals('broken', $car->status());
     }
 
     /**
@@ -250,5 +250,21 @@ class CarTest extends TestCase
 
         $this->car->drive(50.0, 100.0);
         $this->assertEquals(0.0, $this->car->speed());
+    }
+
+    /**
+     * @test
+     */
+    public function itShouldNotSetSpeedIfCarIsBroken()
+    {
+        $maxMileage = 1000.0;
+        $car = new Car(250, $maxMileage);
+        $car->start();
+
+        $car->drive(50.0, 1000.1);
+        $this->assertEquals(0.0, $car->speed());
+
+        $car->drive(50.0, 500.0);
+        $this->assertEquals(0.0, $car->speed());
     }
 }
