@@ -19,6 +19,15 @@ class CarTest extends TestCase
     /**
      * @test
      */
+    public function itShouldHaveStatusParkingAfterCreation()
+    {
+        $car = new Car(50.0, 100.0);
+        $this->assertEquals('parking', $car->status());
+    }
+
+    /**
+     * @test
+     */
     public function itShouldStartTheCar()
     {
         $this->assertEquals('parking', $this->car->status());
