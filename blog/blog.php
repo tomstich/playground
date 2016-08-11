@@ -19,6 +19,7 @@ $blog = createArticle($blog, $jenny, 'My Headline 2', 'Some other content...');
 $blog = createArticle($blog, $tom, 'My Headline 3', 'Yet some other content...');
 $blog = createArticle($blog, $jenny, 'Another Headline', 'Some other content... bla');
 
+
 // All articles from Jenny
 $jennysArticles = findArticlesByAuthor($blog, $jenny);
 
@@ -26,7 +27,8 @@ $jennysArticles = findArticlesByAuthor($blog, $jenny);
 $tomsArticles = findArticlesByAuthor($blog, $tom);
 
 // All articles from a specific date
-$day = 17;
+
+$day = 11;
 $month = 8;
 $year = 2016;
 
