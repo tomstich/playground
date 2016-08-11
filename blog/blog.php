@@ -2,29 +2,35 @@
 
 require 'blog_manager.php';
 
-$authors = ['Klaus', 'Peter', 'Lisa', 'Jenny', 'Tom', 'Anouar'];
-$roles = ['Admin', 'Moderator', 'User'];
-$headlines = ['Hallo', 'Moin', 'Urlaub', 'Sonne'];
-$contents = ['ASJDHKASJHDFSDFBKSDDKFDSH', '166416313464613131654', 'fsdkdbisocnxpnofodn', '!@#$%^&*()_(*&^%$#)'];
+$blog = createBlog('My Fancy Blog');
 
-$articleListSize = 5;
-$articleList = [];
+$tom = createAuthor('Tom Stich', 'admin');
+$jenny = createAuthor('Jennifer Eschenhorn', 'moderator');
 
-for ($i=0; $i < $articleListSize; $i++) {
-    $id = $i;
+$imagesForTomsArticle = [
+    createImage('sunset.jpg', 640, 480),
+    createImage('moonlight.jpg', 640, 480),
+    createImage('forest.jpg', 630, 580),
+];
 
-    $author = addAuthor($authors[rand(0, count($authors) - 1)], $roles[rand(0, count($roles) - 1)], $id);
 
-    $article = createArticle(
-        $headlines[rand(0, count($headlines) - 1)],
-        $contents[rand(0, count($contents) - 1)],
-        $author,
-        $id
-    );
+$blog = createArticle($blog, $tom, 'My Headline', 'Some content...', $imagesForTomsArticle);
+$blog = createArticle($blog, $jenny, 'My Headline 2', 'Some other content...');
+$blog = createArticle($blog, $tom, 'My Headline 3', 'Yet some other content...');
+$blog = createArticle($blog, $jenny, 'Another Headline', 'Some other content... bla');
 
-    $articleList[$article['id']] = $article;
-}
+// All articles from Jenny
+$jennysArticles = findArticlesByAuthor($blog, $jenny);
 
-debugArticle($articleList);
-$articleList = deleteArticle($articleList, 3);
-debugArticle($articleList);
+// All articles from Tom
+$tomsArticles = findArticlesByAuthor($blog, $tom);
+
+// All articles from a specific date
+$day = 17;
+$month = 8;
+$year = 2016;
+
+$articlesOfDate = findArticlesByDate($blog, $day, $month, $year);
+
+// Output all articles in a formatted manner sorted by date
+printBlog($blog);
