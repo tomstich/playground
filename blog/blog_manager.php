@@ -38,7 +38,7 @@ function createAuthor(string $author, string $role): array
  * @param int $height
  * @return array
  */
-function createImage(string $name, int $width, int $height)
+function createImage(string $name, int $width, int $height): array
 {
     return [
         'name' => $name,
@@ -125,14 +125,15 @@ function printBlog(array $articleList)
     foreach ($articleList['article'] as $article) {
         if (count($article['images']) > 0) {
 
-            $imageOutput = '';
+            $imageOutput = [];
             foreach ($article['images'] as $image) {
-                $imageOutput .=  $image['width'] . 'x' . $image['height'] . ", '" . $image['name'] . "'; ";
+                $imageOutput[] =  "${image['width']} x ${image['height']} , '${image['name']}'";
             }
+
             printf("Headline:\t%s\nContent:\t%s\nImage:\t\t%s\nDate:\t\t%s\nAuthor:\t\t%s, %s\n\n"
                 , $article['headline']
                 , $article['content']
-                , $imageOutput
+                , implode('; ', $imageOutput)
                 , $article['date']
                 , $article['author']['name']
                 , $article['author']['role']
