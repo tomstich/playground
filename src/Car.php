@@ -37,10 +37,18 @@ class Car
     }
 
     public function start()
-    {   if ($this->status === 'broken') {
-            $this->status = 'broken';
-        } else {
-            $this->status = 'running';
+    {
+        switch ($this->status) {
+            case 'broken':
+
+            case 'running':
+
+            case 'driving':
+                break;
+
+            case 'parking':
+                $this->status = 'running';
+                break;
         }
     }
 
