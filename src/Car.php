@@ -54,7 +54,7 @@ class Car
 
     public function stop()
     {
-        if ($this->status === 'driving') {
+        if ($this->status === 'driving' || $this->status === 'broken') {
             return;
         } else {
             $this->status = 'parking';
