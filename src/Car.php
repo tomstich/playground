@@ -67,6 +67,7 @@ class Car
 
     /**
      * @param float
+     * @param float
      */
     public function drive(float $speed, float $mileage)
     {
@@ -83,13 +84,12 @@ class Car
                 $this->speed = 0.0;
                 $this->status = 'running';
             }
-            if (($mileage + $this->mileage) > $this->maxMileage) {
+            if ($this->mileage > $this->maxMileage) {
                 $this->mileage = $this->maxMileage;
                 $this->status = 'broken';
                 $this->speed = 0.0;
             }
         }
-
     }
 
     /**
@@ -109,8 +109,26 @@ class Car
         return $this->mileage;
     }
 
+    /**
+     * @return string
+     */
     public function brand()
     {
         return $this->brand;
+    }
+
+    /**
+     * @return array
+     */
+    public function stats()
+    {
+        return [
+            'brand' => $this->brand,
+            'maxSpeed' => $this->maxSpeed,
+            'maxMileage' => $this->maxMileage,
+            'speed' => $this->speed,
+            'mileage' => $this->mileage,
+            'status' => $this->status,
+        ];
     }
 }
