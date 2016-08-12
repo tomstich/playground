@@ -42,15 +42,18 @@ class Car
      */
     public function drive(float $speed)
     {
-        $this->status = 'driving';
-        $this->speed = $speed;
-        if ($this->speed > $this->maxSpeed) {
-            $this->speed = $this->maxSpeed;
+        if ($this->status === 'running') {
+            $this->status = 'driving';
+            $this->speed = $speed;
+            if ($this->speed > $this->maxSpeed) {
+                $this->speed = $this->maxSpeed;
+            }
+            if ($this->speed <= 0) {
+                $this->speed = 0.0;
+                $this->status = 'running';
+            }
         }
-        if ($this->speed <= 0) {
-            $this->speed = 0.0;
-            $this->status = 'running';
-        }
+
     }
 
     /**
