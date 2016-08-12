@@ -2,6 +2,8 @@
 
 namespace Jimdo;
 
+use Jimdo\Car\AuthorizedDealer;
+
 class Car
 {
     /** @var string */
@@ -22,7 +24,13 @@ class Car
     /** @var float */
     private $maxMileage;
 
-    public function __construct(string $brand, float $maxSpeed, float $maxMileage)
+    /**
+     * @param string $brand
+     * @param float $maxSpeed
+     * @param float $maxMileage
+     * @param AuthorizedDealer $service
+     */
+    public function __construct(string $brand, float $maxSpeed, float $maxMileage, AuthorizedDealer $dealer = null)
     {
         $this->brand = $brand;
         $this->status = 'parking';
@@ -30,6 +38,10 @@ class Car
         $this->mileage = 0.0;
         $this->maxSpeed = $maxSpeed;
         $this->maxMileage = $maxMileage;
+
+        if ($dealer !== null) {
+            $dealer->secretKey(uniqid());
+        }
     }
 
     public function start()

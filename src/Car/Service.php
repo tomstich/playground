@@ -4,7 +4,7 @@ namespace Jimdo\Car;
 
 use Jimdo\Car as Car;
 
-class Service
+class Service implements AuthorizedDealer
 {
     public function newCar(string $brand): Car
     {
@@ -27,5 +27,10 @@ class Service
         }
 
         return new Car($brand, $maxSpeed, $maxMileage);
+    }
+
+    public function secretKey(string $secretKey)
+    {
+
     }
 }

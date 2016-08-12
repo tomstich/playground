@@ -3,6 +3,7 @@
 namespace Jimdo;
 
 use PHPUnit\Framework\TestCase;
+use Jimdo\Car\FakeService;
 
 class CarTest extends TestCase
 {
@@ -326,5 +327,19 @@ class CarTest extends TestCase
         $expectedStats['speed'] = 0.0;
         $expectedStats['mileage'] = 6000.0;
         $this->assertEquals($expectedStats, $car->stats());
+    }
+
+    /**
+     * @test
+     */
+    public function itShouldGiveSecretKeyToService()
+    {
+        $fakeService = new FakeService();
+
+        $car = new Car('BMW', 180.0, 5000.0, $fakeService);
+        $this->assertEquals(
+            strlen(uniqid()),
+            strlen($fakeService->secretKey)
+        );
     }
 }
