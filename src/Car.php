@@ -49,7 +49,10 @@ class Car
         if ($this->status === 'running' || $this->status === 'driving') {
             $this->status = 'driving';
             $this->speed += $speed;
-            $this->mileage += $mileage;
+            if ($mileage >= 0) {
+                $this->mileage += $mileage;
+            }
+
             if ($this->speed > $this->maxSpeed) {
                 $this->speed = $this->maxSpeed;
             }
