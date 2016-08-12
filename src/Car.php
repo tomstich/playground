@@ -16,11 +16,16 @@ class Car
     /** @var float */
     private $mileage;
 
-    public function __construct(string $brand, float $maxSpeed)
+    /** @var float */
+    private $maxMileage;
+
+    public function __construct(string $brand, float $maxSpeed, float $maxMileage)
     {
         $this->status = 'parking';
         $this->maxSpeed = $maxSpeed;
         $this->speed = 0.0;
+        $this->mileage = 0.0;
+        $this->maxMileage = $maxMileage;
     }
 
     /**
@@ -52,13 +57,15 @@ class Car
             if ($mileage >= 0) {
                 $this->mileage += $mileage;
             }
-
             if ($this->speed > $this->maxSpeed) {
                 $this->speed = $this->maxSpeed;
             }
             if ($this->speed <= 0) {
                 $this->speed = 0.0;
                 $this->status = 'running';
+            }
+            if (($mileage + $this->mileage) > $this->maxMileage) {
+                $this->mileage = $this->maxMileage;
             }
         }
 
@@ -77,6 +84,7 @@ class Car
      */
     public function mileage()
     {
+
         return $this->mileage;
     }
 }
