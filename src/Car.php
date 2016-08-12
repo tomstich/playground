@@ -37,8 +37,11 @@ class Car
     }
 
     public function start()
-    {
-        $this->status = 'running';
+    {   if ($this->status === 'broken') {
+            $this->status = 'broken';
+        } else {
+            $this->status = 'running';
+        }
     }
 
     public function stop()
@@ -54,7 +57,7 @@ class Car
         if ($this->status === 'running' || $this->status === 'driving') {
             $this->status = 'driving';
             $this->speed += $speed;
-            if ($mileage >= 0) {
+            if ($mileage >= 0 && $speed > 0) {
                 $this->mileage += $mileage;
             }
             if ($this->speed > $this->maxSpeed) {
