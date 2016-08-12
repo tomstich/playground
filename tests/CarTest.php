@@ -110,7 +110,7 @@ class CarTest extends TestCase
     /**
      * @test
      */
-    public function itShouldReturnTheSpeed()
+    public function itShouldIncreaseAndDecreaseSpeed()
     {
         $this->assertEquals(0.0, $this->car->speed());
 
