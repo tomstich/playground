@@ -24,6 +24,9 @@ class Car
     /** @var float */
     private $maxMileage;
 
+    /** @var string */
+    private $secretKey;
+
     /**
      * @param string $brand
      * @param float $maxSpeed
@@ -40,7 +43,8 @@ class Car
         $this->maxMileage = $maxMileage;
 
         if ($dealer !== null) {
-            $dealer->secretKey(uniqid());
+            $this->secretKey = uniqid($brand);
+            $dealer->secretKey($this->secretKey);
         }
     }
 
@@ -138,5 +142,15 @@ class Car
             'mileage' => $this->mileage,
             'status' => $this->status,
         ];
+    }
+
+    /**
+     * @param string
+     */
+    public function resetMileage(string $secretKey)
+    {
+        if ($this->secretKey === $secretKey) {
+            $this->mileage = 0.0;
+        }
     }
 }
