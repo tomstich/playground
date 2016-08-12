@@ -42,48 +42,41 @@ class Car
 
     public function start()
     {
-        switch ($this->status) {
-            case 'broken':
-
-            case 'running':
-
-            case 'driving':
-                break;
-
-            case 'parking':
-                $this->status = 'running';
-                break;
+        if ($this->status === 'parking') {
+            $this->status = 'running';
         }
     }
 
     public function stop()
     {
-        if ($this->status === 'driving' || $this->status === 'broken') {
-            return;
-        } else {
+        if (!($this->status === 'driving' || $this->status === 'broken')) {
             $this->status = 'parking';
         }
     }
 
     /**
-     * @param float
-     * @param float
+     * @param float $speed
+     * @param float $distance
      */
-    public function drive(float $speed, float $mileage)
+    public function drive(float $speed, float $distance)
     {
         if ($this->status === 'running' || $this->status === 'driving') {
             $this->status = 'driving';
             $this->speed += $speed;
-            if ($mileage >= 0 && $speed > 0) {
-                $this->mileage += $mileage;
+
+            if ($distance >= 0 && $speed > 0) {
+                $this->mileage += $distance;
             }
+
             if ($this->speed > $this->maxSpeed) {
                 $this->speed = $this->maxSpeed;
             }
+
             if ($this->speed <= 0) {
                 $this->speed = 0.0;
                 $this->status = 'running';
             }
+
             if ($this->mileage > $this->maxMileage) {
                 $this->mileage = $this->maxMileage;
                 $this->status = 'broken';

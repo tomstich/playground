@@ -327,4 +327,19 @@ class CarTest extends TestCase
         $expectedStats['mileage'] = 6000.0;
         $this->assertEquals($expectedStats, $car->stats());
     }
+
+    /**
+    * @test
+    */
+    public function itShouldBeRunningWhenSpeedIsZero()
+    {
+        $this->car->start();
+
+        $this->car->drive(50.0, 30.0);
+        $this->assertEquals('driving', $this->car->status());
+
+        $this->car->drive(-50.0, 30.0);
+        $this->assertEquals(0.0, $this->car->speed());
+        $this->assertEquals('running', $this->car->status());
+    }
 }
