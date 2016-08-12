@@ -19,6 +19,9 @@ class Car
     /** @var float */
     private $maxMileage;
 
+    /** @var string */
+    private $brand;
+
     public function __construct(string $brand, float $maxSpeed, float $maxMileage)
     {
         $this->status = 'parking';
@@ -26,6 +29,7 @@ class Car
         $this->speed = 0.0;
         $this->mileage = 0.0;
         $this->maxMileage = $maxMileage;
+        $this->brand = $brand;
     }
 
     /**
@@ -103,5 +107,10 @@ class Car
     {
 
         return $this->mileage;
+    }
+
+    public function brand()
+    {
+        return $this->brand;
     }
 }
