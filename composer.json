@@ -15,7 +15,12 @@
         }
     ],
     "autoload": {
-        "psr-4": {"Jimdo\\": "src/"}
+        "psr-4": {
+            "Jimdo\\": [
+              "src/",
+              "tests/"
+            ]
+          }
     },
     "require": {}
 }
