@@ -47,6 +47,10 @@ class Car
         if ($this->speed > $this->maxSpeed) {
             $this->speed = $this->maxSpeed;
         }
+        if ($this->speed <= 0) {
+            $this->speed = 0.0;
+            $this->status = 'running';
+        }
     }
 
     /**
