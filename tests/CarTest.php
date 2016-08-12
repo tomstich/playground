@@ -3,6 +3,7 @@
 namespace Jimdo;
 
 use PHPUnit\Framework\TestCase;
+use Jimdo\Car\FakeService;
 
 class CarTest extends TestCase
 {
@@ -341,5 +342,39 @@ class CarTest extends TestCase
         $this->car->drive(-50.0, 30.0);
         $this->assertEquals(0.0, $this->car->speed());
         $this->assertEquals('running', $this->car->status());
+    }
+
+    /**
+     * @test
+     */
+    public function itShouldGiveSecretKeyToService()
+    {
+        $fakeService = new FakeService();
+
+        $car = new Car('BMW', 180.0, 5000.0, $fakeService);
+        $this->assertEquals(
+            strlen(uniqid('BMW')),
+            strlen($fakeService->secretKey)
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function itShouldResetMileageOnlyWithSecretKey()
+    {
+        $fakeService = new FakeService();
+        $car = new Car('BMW', 180.0, 5000.0, $fakeService);
+
+        $car->start();
+
+        $car->drive(50.0, 1000.0);
+        $this->assertEquals(1000.0, $car->mileage());
+
+        $car->resetMileage('a wrong key');
+        $this->assertEquals(1000.0, $car->mileage());
+
+        $car->resetMileage($fakeService->secretKey);
+        $this->assertEquals(0.0, $car->mileage());
     }
 }

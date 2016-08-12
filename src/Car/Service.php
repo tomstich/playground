@@ -4,8 +4,19 @@ namespace Jimdo\Car;
 
 use Jimdo\Car as Car;
 
-class Service
+class Service implements AuthorizedDealer
 {
+    /** @param array */
+    private $keychain;
+
+    public function __construct()
+    {
+        $this->keychain = [];
+    }
+
+    /**
+     * @param string $brand
+     */
     public function newCar(string $brand): Car
     {
         switch ($brand) {
@@ -26,6 +37,23 @@ class Service
                 $maxMileage = 7000.0;
         }
 
-        return new Car($brand, $maxSpeed, $maxMileage);
+        return new Car($brand, $maxSpeed, $maxMileage, $this);
+    }
+
+    /**
+     * @param Car $car
+     * @param string $secretKey
+     */
+    public function secretKey(Car $car, string $secretKey)
+    {
+        $this->keychain[spl_object_hash($car)] = $secretKey;
+    }
+
+    /**
+     * @param Car $car
+     */
+    public function resetMileage(Car $car)
+    {
+        $car->resetMileage($this->keychain[spl_object_hash($car)]);
     }
 }
