@@ -44,7 +44,7 @@ class Car
 
         if ($dealer !== null) {
             $this->secretKey = uniqid($brand);
-            $dealer->secretKey($this->secretKey);
+            $dealer->secretKey($this, $this->secretKey);
         }
     }
 

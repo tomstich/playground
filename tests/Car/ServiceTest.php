@@ -36,4 +36,27 @@ class ServiceTest extends TestCase
             $this->assertEquals($maxMileage, $car->stats()['maxMileage']);
         }
     }
+
+    /**
+     * @test
+     */
+    public function itShouldResetMileage()
+    {
+        $service = new Service();
+
+        $carOne = $service->newCar('BMW');
+        $carTwo = $service->newCar('Mercedes');
+
+        $carOne->start();
+        $carOne->drive(100.0, 100.0);
+
+        $carTwo->start();
+        $carTwo->drive(120.0, 150.0);
+
+        $service->resetMileage($carOne);
+        $this->assertEquals(0.0, $carOne->mileage());
+
+        $service->resetMileage($carTwo);
+        $this->assertEquals(0.0, $carTwo->mileage());
+    }
 }
