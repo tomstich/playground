@@ -66,6 +66,8 @@ class Car
             }
             if (($mileage + $this->mileage) > $this->maxMileage) {
                 $this->mileage = $this->maxMileage;
+                $this->status = 'broken';
+                $this->speed = 0.0;
             }
         }
 
