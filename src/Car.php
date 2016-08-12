@@ -54,7 +54,11 @@ class Car
 
     public function stop()
     {
-        $this->status = 'parking';
+        if ($this->status === 'driving') {
+            return;
+        } else {
+            $this->status = 'parking';
+        }
     }
 
     /**
